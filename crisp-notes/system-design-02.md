@@ -63,91 +63,6 @@ Check out the following links to get a better idea of what to expect:
 * [Intro to Architecture and Systems Design Interviews](https://www.youtube.com/watch?v=ZgdS0EUmn70)
 * [System design template](https://leetcode.com/discuss/career/229177/My-System-Design-Template)
 
-## System design interview questions with solutions
-
-> Common system design interview questions with sample discussions, code, and diagrams.
->
-> Solutions linked to content in the `solutions/` folder.
-
-| Question | |
-|---|---|
-| Design Pastebin.com (or Bit.ly) | [Solution](solutions/system_design/pastebin/README.md) |
-| Design the Twitter timeline and search (or Facebook feed and search) | [Solution](solutions/system_design/twitter/README.md) |
-| Design a web crawler | [Solution](solutions/system_design/web_crawler/README.md) |
-| Design Mint.com | [Solution](solutions/system_design/mint/README.md) |
-| Design the data structures for a social network | [Solution](solutions/system_design/social_graph/README.md) |
-| Design a key-value store for a search engine | [Solution](solutions/system_design/query_cache/README.md) |
-| Design Amazon's sales ranking by category feature | [Solution](solutions/system_design/sales_rank/README.md) |
-| Design a system that scales to millions of users on AWS | [Solution](solutions/system_design/scaling_aws/README.md) |
-| Add a system design question | [Contribute](#contributing) |
-
-### Design Pastebin.com (or Bit.ly)
-
-[View exercise and solution](solutions/system_design/pastebin/README.md)
-
-![Imgur](images/4edXG0T.png)
-
-### Design the Twitter timeline and search (or Facebook feed and search)
-
-[View exercise and solution](solutions/system_design/twitter/README.md)
-
-![Imgur](images/jrUBAF7.png)
-
-### Design a web crawler
-
-[View exercise and solution](solutions/system_design/web_crawler/README.md)
-
-![Imgur](images/bWxPtQA.png)
-
-### Design Mint.com
-
-[View exercise and solution](solutions/system_design/mint/README.md)
-
-![Imgur](images/V5q57vU.png)
-
-### Design the data structures for a social network
-
-[View exercise and solution](solutions/system_design/social_graph/README.md)
-
-![Imgur](images/cdCv5g7.png)
-
-### Design a key-value store for a search engine
-
-[View exercise and solution](solutions/system_design/query_cache/README.md)
-
-![Imgur](images/4j99mhe.png)
-
-### Design Amazon's sales ranking by category feature
-
-[View exercise and solution](solutions/system_design/sales_rank/README.md)
-
-![Imgur](images/MzExP06.png)
-
-### Design a system that scales to millions of users on AWS
-
-[View exercise and solution](solutions/system_design/scaling_aws/README.md)
-
-![Imgur](images/jj3A5N8.png)
-
-## Object-oriented design interview questions with solutions
-
-> Common object-oriented design interview questions with sample discussions, code, and diagrams.
->
-> Solutions linked to content in the `solutions/` folder.
-
->**Note: This section is under development**
-
-| Question | |
-|---|---|
-| Design a hash map | [Solution](solutions/object_oriented_design/hash_table/hash_map.ipynb)  |
-| Design a least recently used cache | [Solution](solutions/object_oriented_design/lru_cache/lru_cache.ipynb)  |
-| Design a call center | [Solution](solutions/object_oriented_design/call_center/call_center.ipynb)  |
-| Design a deck of cards | [Solution](solutions/object_oriented_design/deck_of_cards/deck_of_cards.ipynb)  |
-| Design a parking lot | [Solution](solutions/object_oriented_design/parking_lot/parking_lot.ipynb)  |
-| Design a chat server | [Solution](solutions/object_oriented_design/online_chat/online_chat.ipynb)  |
-| Design a circular array | [Contribute](#contributing)  |
-| Add an object-oriented design question | [Contribute](#contributing) |
-
 ## System design topics: start here
 
 New to system design?
@@ -233,14 +148,13 @@ In a distributed computer system, you can only support two of the following guar
 *Networks aren't reliable, so you'll need to support partition tolerance.  You'll need to make a software tradeoff between consistency and availability.*
 
 #### CP - consistency and partition tolerance
-
-Waiting for a response from the partitioned node might result in a timeout error.  CP is a good choice if your business needs require atomic reads and writes.
+- Waiting for a response from the partitioned node might result in a timeout error.  
+- CP is a good choice if your business needs require atomic reads and writes.
 
 #### AP - availability and partition tolerance
-
-Responses return the most readily available version of the data available on any node, which might not be the latest.  Writes might take some time to propagate when the partition is resolved.
-
-AP is a good choice if the business needs to allow for [eventual consistency](#eventual-consistency) or when the system needs to continue working despite external errors.
+- Responses return the most readily available version of the data available on any node, which might not be the latest.  
+    - Writes might take some time to propagate when the partition is resolved.
+- AP is a good choice if the business needs to allow for [eventual consistency](#eventual-consistency) or when the system needs to continue working despite external errors.
 
 ### Source(s) and further reading
 
@@ -250,20 +164,22 @@ AP is a good choice if the business needs to allow for [eventual consistency](#e
 * [The CAP theorem](https://www.youtube.com/watch?v=k-Yaq8AHlFA)
 
 ## Consistency patterns
-
-With multiple copies of the same data, we are faced with options on how to synchronize them so clients have a consistent view of the data.  Recall the definition of consistency from the [CAP theorem](#cap-theorem) - Every read receives the most recent write or an error.
+- With multiple copies of the same data, 
+    - we are faced with options on how to synchronize them so clients have a consistent view of the data.  
+    - Recall the definition of consistency from the [CAP theorem](#cap-theorem) 
+    - Every read receives the most recent write or an error.
 
 ### Weak consistency
-
-After a write, reads may or may not see it.  A best effort approach is taken.
-
-This approach is seen in systems such as memcached.  Weak consistency works well in real time use cases such as VoIP, video chat, and realtime multiplayer games.  For example, if you are on a phone call and lose reception for a few seconds, when you regain connection you do not hear what was spoken during connection loss.
+- After a write, reads may or may not see it.  
+    - A best effort approach is taken.
+- This approach is seen in systems such as memcached.  
+    - Weak consistency works well in real time use cases such as VoIP, video chat, and realtime multiplayer games.  
+    - For example, if you are on a phone call and lose reception for a few seconds, when you regain connection you do not hear what was spoken during connection loss.
 
 ### Eventual consistency
 
-After a write, reads will eventually see it (typically within milliseconds).  Data is replicated asynchronously.
-
-This approach is seen in systems such as DNS and email.  Eventual consistency works well in highly available systems.
+- After a write, reads will eventually see it (typically within milliseconds).  Data is replicated asynchronously.
+- This approach is seen in systems such as DNS and email.  Eventual consistency works well in highly available systems.
 
 ### Strong consistency
 
